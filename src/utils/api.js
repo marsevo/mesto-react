@@ -82,23 +82,38 @@ class Api {
       .then(res => this._checkResponse(res))
   }
 
-  // ф-ия отправки лайка на сервер 
-  setCardLike(cardId) {
-    console.log(cardId);
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this._headers,
-    })
-      .then(res => this._checkResponse(res))
-  }
+  // // ф-ия отправки лайка на сервер 
+  // setCardLike(cardId) {
+  //   console.log(cardId);
+  //   return fetch(`${this._url}/cards/${cardId}/likes`, {
+  //     method: 'PUT',
+  //     headers: this._headers,
+  //   })
+  //     .then(res => this._checkResponse(res))
+  // }
 
-  // ф-ия удаления лайка с сервера
-  removeCardLike(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: 'DELETE',
-      headers: this._headers,
-    })
-      .then(res => this._checkResponse(res))
+  // // ф-ия удаления лайка с сервера
+  // removeCardLike(cardId) {
+  //   return fetch(`${this._url}/cards/${cardId}/likes`, {
+  //     method: 'DELETE',
+  //     headers: this._headers,
+  //   })
+  //     .then(res => this._checkResponse(res))
+  // }
+  toggleCardLikeStatus(cardId, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._url}/cards/${cardId}/likes`, {
+        method: 'DELETE',
+        headers: this._headers,
+      })
+        .then(res => this._checkResponse(res))
+    } else {
+      return fetch(`${this._url}/cards/${cardId}/likes`, {
+        method: 'PUT',
+        headers: this._headers,
+      })
+        .then(res => this._checkResponse(res))
+    }
   }
 }
 
