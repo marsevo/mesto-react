@@ -58,14 +58,15 @@ function App() {
     api.toggleCardLikeStatus(card._id, isLiked).then((newCard) => {
       setCards((state) =>
         state.map((c) => c._id === card._id ? newCard : c));
-    });
+    })
+      .catch((err) => alert(err));
   }
 
   function handleCardDelete(card) {
     api.deleteCard(card._id).then(() => {
       setCards(state => state.filter((c) => c._id !== card._id));
     })
-    .catch((err) => alert(err));
+      .catch((err) => alert(err));
   }
 
   function handleUpdateUser(value) {
@@ -73,22 +74,22 @@ function App() {
       setCurrentUser(res);
       closeAllPopups();
     })
-    .catch((err) => alert(err));
+      .catch((err) => alert(err));
   }
   function handleUpdateAvatar(value) {
     api.setUserAvatar(value).then((res) => {
       setCurrentUser(res);
       closeAllPopups();
     })
-    .catch((err) => alert(err));
+      .catch((err) => alert(err));
   }
   function handleAddPlaceSubmit(card) {
     api.addNewCard(card).then((newCard) => {
-        setCards([newCard, ...cards]);
-        closeAllPopups();
-      })
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
       .catch((err) => alert(err));
-    }
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -116,13 +117,6 @@ function App() {
         <AddPlacePopup isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit} />
-
-
-
-
-
-
-
 
         <ImagePopup
           card={selectedCard}
