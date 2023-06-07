@@ -65,6 +65,7 @@ function App() {
     api.deleteCard(card._id).then(() => {
       setCards(state => state.filter((c) => c._id !== card._id));
     })
+    .catch((err) => alert(err));
   }
 
   function handleUpdateUser(value) {
@@ -72,18 +73,21 @@ function App() {
       setCurrentUser(res);
       closeAllPopups();
     })
+    .catch((err) => alert(err));
   }
   function handleUpdateAvatar(value) {
     api.setUserAvatar(value).then((res) => {
       setCurrentUser(res);
       closeAllPopups();
     })
+    .catch((err) => alert(err));
   }
   function handleAddPlaceSubmit(card) {
     api.addNewCard(card).then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
+      .catch((err) => alert(err));
     }
 
   return (
